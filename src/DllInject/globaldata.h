@@ -14,7 +14,8 @@
 #include <QObject>
 #include <QThread>
 
-#include "windows.h"
+#include <windows.h>
+#include <tchar.h>
 //头文件包含区--end
 
 //结构体含区--start

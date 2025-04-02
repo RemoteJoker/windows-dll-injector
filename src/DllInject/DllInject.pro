@@ -21,14 +21,18 @@ SOURCES += \
     injectui.cpp \
     main.cpp \
     thread_0_func.cpp \
-    thread_1_func.cpp \
+    thread_1_func.cpp \ \
+    thread_2_func.cpp \
+    thread_3_func.cpp
 
 HEADERS += \
     coredispatch.h \
     globaldata.h \
     injectui.h \
     thread_0_func.h \
-    thread_1_func.h \
+    thread_1_func.h \ \
+    thread_2_func.h \
+    thread_3_func.h
 
 FORMS += \
     injectui.ui \

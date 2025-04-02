@@ -21,8 +21,59 @@ DLL基础知识
 
 DLL注入相关
 ============
+①远程线程注入:
+利用CreateRemoteThread在目标线程创建远程线程执行LoadLibrary加载DLL
+最常用的方法，需要获取被注入进程的句柄，以及将要注入DLL的路径
+首先要申请内存，把DLL写入。相当于在被注入进程中先把自己的东西放进去
+其次要获取kernel.dll这个模块的LoadLiarbry这个函数，加载之前放进去的DLL
+最后要创建一个线程，来运行DLL。
+
+简单理解就是先把东西放进去，在启动自己放进去的东西
+那么如果想看看自己的进程会不会被监控，显而易见CreateRemoteThread和LoadLibrary两个API是重点
+
+②注册表注入:
+AppInit_DLLs:指定要加载的DLL列表
+LoadAppInit_DLLs:启用|禁用
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Windows
+
+这个方法特点:
+隐蔽性好，不容易被检测
+所有使用user32.dll的进程都会受影响
+
+③消息钩子注入:
+消息钩子注入是利用Windows消息机制将DLL加载到目标进程的一种方法，通过设置全局Windows钩子来实现DLL注入
+注入程序（exe）
+  │
+  ├── 加载钩子DLL（LoadLibrary）
+  │
+  ├── 设置钩子（SetWindowsHookEx）
+  │   │
+  │   └── 系统将DLL映射到目标进程
+  │       │
+  │       ├── 目标进程调用HookProc
+  │       │   │
+  │       │   ├── 你的代码处理消息
+  │       │   │
+  │       │   └── CallNextHookEx
+  │       │
+  │       └── 消息继续传递
+  │
+  └── 卸载钩子（UnhookWindowsHookEx）
+
+④APC（异步过程调用）注入
+APC（异步过程调用）注入是一种利用Windows线程APC队列将DLL加载到目标进程的技术。它比远程线程注入更隐蔽，适用于特定场景
+
+Step 1: 获取目标进程的所有线程。
+Step 2: 在每个线程的APC队列插入 LoadLibraryA/W 调用。
+Step 3: 当目标线程进入可警告状态时，自动加载DLL
+
 
 版本控制
 ============
 [2025|04|02]
 基础框架搭建
+
+[2025|04|02]
+完成远程线程注入；注册表注入；内容补充
