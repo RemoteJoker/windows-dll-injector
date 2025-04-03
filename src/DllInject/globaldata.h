@@ -3,7 +3,7 @@
 
 //宏区--start
 #define m_software_name "DllInject"//软件名字
-#define m_software_version "0.2"//软件版本
+#define m_software_version "0.3"//软件版本
 //宏区--end
 
 //头文件包含区--start
