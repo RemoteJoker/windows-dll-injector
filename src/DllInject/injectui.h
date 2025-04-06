@@ -21,7 +21,8 @@ public:
     void InitConnect();
 
 protected slots:
-    void SelectFile();
+    void SelectFile();//选择DLL文件
+    void StartInject();//开始注入
 
 private:
     Ui::InjectUi *ui;
