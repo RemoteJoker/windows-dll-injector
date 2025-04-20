@@ -23,9 +23,11 @@ public:
 protected slots:
     void SelectFile();//选择DLL文件
     void StartInject();//开始注入
+    void FlushProcess();//刷新进程显示
 
 private:
     Ui::InjectUi *ui;
+    QTimer *processTimer;
 };
 
 #endif // INJECTUI_H

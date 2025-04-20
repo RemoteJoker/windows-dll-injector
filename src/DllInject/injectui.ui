@@ -66,9 +66,9 @@ font-family:songti;</string>
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>99</y>
+     <y>100</y>
      <width>580</width>
-     <height>391</height>
+     <height>390</height>
     </rect>
    </property>
   </widget>

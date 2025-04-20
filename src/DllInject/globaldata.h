@@ -13,8 +13,10 @@
 #include <QFileInfo>
 #include <QObject>
 #include <QThread>
+#include <QTimer>
 
 #include <windows.h>
+#include <tlhelp32.h>
 #include <tchar.h>
 //头文件包含区--end
 
